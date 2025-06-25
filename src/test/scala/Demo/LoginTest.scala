@@ -18,8 +18,8 @@ class LoginTest extends Simulation{
       .post(s"users/login")
       .body(StringBody(
           """{
-            "email": ${email},
-            "password": ${password}
+            "email": $email,
+            "password": $password
           }"""
         )).asJson
        //Validar status 200

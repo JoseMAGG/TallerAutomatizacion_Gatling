@@ -14,13 +14,6 @@ class LoginTest extends Simulation{
 
   // 2 Scenario Definition
   val scn = scenario("Login")
-    .exec(http("login")
-      .post(s"users/login")
-      .body(StringBody(s"""{"email": "$email", "password": "$password"}""")).asJson
-       //Validar status 200
-      .check(status.is(200))
-      .check(jsonPath("$.token").saveAs("authToken"))
-    )
     .exec(http("contacts")
       .post(s"contacts")
       .header("Authorization", "Bearer $authToken")
@@ -37,6 +30,13 @@ class LoginTest extends Simulation{
     "country": "USA"}""")).asJson
        //Validar status 200
       .check(status.is(201))
+    )
+    .exec(http("login")
+      .post(s"users/login")
+      .body(StringBody(s"""{"email": "$email", "password": "$password"}""")).asJson
+       //Validar status 200
+      .check(status.is(200))
+      .check(jsonPath("$.token").saveAs("authToken"))
     )
   // 3 Load Scenario
   setUp(

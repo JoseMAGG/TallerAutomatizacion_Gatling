@@ -13,6 +13,7 @@ class LoginTest extends Simulation{
     .check(status.is(200))
   
   val customFeeder = Iterator.continually(
+    val rnd = new scala.util.Random
     Map(
       "firstName" -> s"First${rnd.nextInt(10000)}",
       "lastName"  -> s"Last${rnd.nextInt(10000)}",

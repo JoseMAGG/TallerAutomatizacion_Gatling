@@ -22,7 +22,6 @@ class LoginTest extends Simulation{
   
   // 2 Scenario Definition
   val scn = scenario("Login")
-  .feed(customFeeder)
     .exec(http("login")
       .post(s"users/login")
       .body(StringBody(s"""{"email": "$email", "password": "$password"}""")).asJson
@@ -30,6 +29,7 @@ class LoginTest extends Simulation{
       .check(status.is(200))
       .check(jsonPath("$.token").saveAs("authToken"))
     )
+    .feed(customFeeder)
     .exec(
       http("Create Contact")
         .post(s"contacts")

@@ -12,13 +12,13 @@ class LoginTest extends Simulation{
     //Verificar de forma general para todas las solicitudes
     .check(status.is(200))
   
-  val customFeeder = Iterator.continually(
+  val customFeeder = Iterator.continually {
     val rnd = new scala.util.Random
     Map(
       "firstName" -> s"First${rnd.nextInt(10000)}",
       "lastName"  -> s"Last${rnd.nextInt(10000)}",
     )
-  )
+  }
   
   // 2 Scenario Definition
   val scn = scenario("Login")
